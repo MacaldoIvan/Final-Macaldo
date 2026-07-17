@@ -5,16 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A responsive mini-project website meeting all F1-F7 requirements.">
     <title>My Mini Project Website</title>
-    <!-- Link separate CSS file -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Tailwind Config to match your original colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        accent: '#f97316',
+                        light: '#f8fafc',
+                        dark: '#1e293b',
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', 'Roboto', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .page-section {
+                @apply hidden py-12 px-[5%] max-w-[1200px] mx-auto;
+            }
+            .page-section.active {
+                @apply block;
+            }
+            .nav-links {
+                @apply list-none flex gap-8;
+            }
+            .nav-links a {
+                @apply text-white font-medium transition-colors duration-300;
+            }
+            .nav-links a:hover, .nav-links a.active {
+                @apply text-accent;
+            }
+            .feature-card, .product-card {
+                @apply bg-white p-6 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] text-center transition-transform duration-300;
+            }
+            .feature-card:hover, .product-card:hover {
+                @apply -translate-y-1;
+            }
+            .price {
+                @apply block mt-2 font-bold text-accent text-xl;
+            }
+            .error {
+                @apply text-red-500 text-xs mt-1 hidden;
+            }
+            .success {
+                @apply mt-3 text-green-600 font-medium hidden;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="bg-light text-dark font-sans leading-relaxed">
     <!-- Semantic Header & Navigation -->
-    <header>
-        <nav class="navbar">
-            <div class="logo">MyProject</div>
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
-            <ul class="nav-links" id="navLinks">
+    <header class="w-full">
+        <nav class="bg-primary text-white py-5 px-[5%] flex justify-between items-center sticky top-0 z-[999]">
+            <div class="text-2xl font-bold">MyProject</div>
+            <button class="md:hidden bg-transparent border-none text-white text-3xl cursor-pointer" id="menuToggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-links max-md:absolute max-md:top-full max-md:left-0 max-md:w-full max-md:bg-primary max-md:flex-col max-md:p-6 max-md:gap-4 max-md:hidden" id="navLinks">
                 <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
                 <li><a href="#products" class="nav-link" data-page="products">Products</a></li>
                 <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
@@ -22,30 +75,30 @@
         </nav>
     </header>
 
-    <main>
+    <main class="w-full">
         <!-- Home Page Section -->
         <section id="home" class="page-section active">
-            <div class="hero">
-                <h1 id="greeting">Welcome!</h1>
-                <p>Your one-stop destination for quality products & services</p>
-                <p id="currentDate"></p>
+            <div class="text-center py-20 px-8 rounded-xl mb-12 bg-gradient-to-r from-primary/85 to-secondary/85 text-white bg-[url('https://via.placeholder.com/1200x400')] bg-center bg-cover">
+                <h1 id="greeting" class="text-4xl md:text-5xl font-bold mb-4">Welcome!</h1>
+                <p class="text-lg mb-2">Your one-stop destination for quality products & services</p>
+                <p id="currentDate" class="text-sm opacity-90"></p>
             </div>
-            <div class="features">
-                <h2>What We Offer</h2>
-                <div class="feature-grid">
+            <div class="w-full">
+                <h2 class="text-3xl font-bold mb-2">What We Offer</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
                     <div class="feature-card">
-                        <img src="https://via.placeholder.com/400x250" alt="High quality products">
-                        <h3>Premium Quality</h3>
+                        <img src="https://via.placeholder.com/400x250" alt="High quality products" class="w-full h-44 object-cover rounded-lg mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Premium Quality</h3>
                         <p>Carefully crafted items for every need</p>
                     </div>
                     <div class="feature-card">
-                        <img src="https://via.placeholder.com/400x250" alt="24/7 customer support">
-                        <h3>Reliable Support</h3>
+                        <img src="https://via.placeholder.com/400x250" alt="24/7 customer support" class="w-full h-44 object-cover rounded-lg mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Reliable Support</h3>
                         <p>Always here to help you anytime</p>
                     </div>
                     <div class="feature-card">
-                        <img src="https://via.placeholder.com/400x250" alt="Fast nationwide delivery">
-                        <h3>Fast Delivery</h3>
+                        <img src="https://via.placeholder.com/400x250" alt="Fast nationwide delivery" class="w-full h-44 object-cover rounded-lg mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Fast Delivery</h3>
                         <p>Ship to your doorstep quickly</p>
                     </div>
                 </div>
@@ -54,26 +107,26 @@
 
         <!-- Products Page Section -->
         <section id="products" class="page-section">
-            <div class="page-header">
-                <h1>Our Products</h1>
-                <p>Handpicked items just for you</p>
+            <div class="mb-8">
+                <h1 class="text-4xl font-bold mb-2">Our Products</h1>
+                <p class="text-lg">Handpicked items just for you</p>
             </div>
-            <div class="product-grid">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="product-card">
-                    <img src="https://via.placeholder.com/400x250" alt="Wireless Bluetooth Headphones">
-                    <h3>Wireless Headphones</h3>
+                    <img src="https://via.placeholder.com/400x250" alt="Wireless Bluetooth Headphones" class="w-full h-44 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Wireless Headphones</h3>
                     <p>Crystal clear sound & long battery life</p>
                     <span class="price">₱1,999</span>
                 </div>
                 <div class="product-card">
-                    <img src="https://via.placeholder.com/400x250" alt="Eco-friendly Canvas Tote Bag">
-                    <h3>Eco Tote Bag</h3>
+                    <img src="https://via.placeholder.com/400x250" alt="Eco-friendly Canvas Tote Bag" class="w-full h-44 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Eco Tote Bag</h3>
                     <p>Durable, reusable & stylish</p>
                     <span class="price">₱249</span>
                 </div>
                 <div class="product-card">
-                    <img src="https://via.placeholder.com/400x250" alt="Insulated Stainless Steel Tumbler">
-                    <h3>Insulated Tumbler</h3>
+                    <img src="https://via.placeholder.com/400x250" alt="Insulated Stainless Steel Tumbler" class="w-full h-44 object-cover rounded-lg mb-4">
+                    <h3 class="text-xl font-semibold mb-2">Insulated Tumbler</h3>
                     <p>Keeps drinks hot/cold for 24 hours</p>
                     <span class="price">₱399</span>
                 </div>
@@ -82,32 +135,32 @@
 
         <!-- Contact Page Section -->
         <section id="contact" class="page-section">
-            <div class="page-header">
-                <h1>Contact Us</h1>
-                <p>We’d love to hear from you!</p>
+            <div class="mb-8">
+                <h1 class="text-4xl font-bold mb-2">Contact Us</h1>
+                <p class="text-lg">We’d love to hear from you!</p>
             </div>
-            <div class="contact-wrapper">
-                <form id="contactForm" class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your full name">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-8">
+                <form id="contactForm" class="lg:col-span-2 bg-white p-8 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)]">
+                    <div class="mb-6">
+                        <label for="name" class="block mb-2 font-medium">Full Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" class="w-full p-3 border border-slate-300 rounded-lg text-base">
                         <span class="error" id="nameError"></span>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" placeholder="your@email.com">
+                    <div class="mb-6">
+                        <label for="email" class="block mb-2 font-medium">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" class="w-full p-3 border border-slate-300 rounded-lg text-base">
                         <span class="error" id="emailError"></span>
                     </div>
-                    <div class="form-group">
-                        <label for="message">Message *</label>
-                        <textarea id="message" name="message" rows="5" placeholder="Write your message here..."></textarea>
+                    <div class="mb-6">
+                        <label for="message" class="block mb-2 font-medium">Message *</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Write your message here..." class="w-full p-3 border border-slate-300 rounded-lg text-base"></textarea>
                         <span class="error" id="messageError"></span>
                     </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
+                    <button type="submit" class="bg-primary hover:bg-secondary text-white border-none py-4 px-8 rounded-lg text-base font-medium cursor-pointer transition-colors duration-300">Send Message</button>
                     <div class="success" id="successMsg">✅ Message sent successfully!</div>
                 </form>
-                <div class="contact-details">
-                    <h3>Reach Us</h3>
+                <div class="bg-slate-200 p-8 rounded-xl leading-loose">
+                    <h3 class="text-xl font-bold mb-4">Reach Us</h3>
                     <p>📍 Marilao, Bulacan</p>
                     <p>📞 +63 998 441 8301</p>
                     <p>✉️ Macaldo Ivan Tyron.ph</p>
@@ -117,11 +170,11 @@
         </section>
     </main>
 
-    <footer>
+    <footer class="w-full bg-dark text-white text-center py-8 mt-8">
         <p>&copy; 2026 My Mini Project. All rights reserved.</p>
     </footer>
 
-    <!-- Link separate JavaScript file -->
+    <!-- Your original JavaScript file remains unchanged -->
     <script src="script.js"></script>
 </body>
 </html>
