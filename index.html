@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A responsive mini-project website meeting all F1-F7 requirements.">
+    <meta name="description" content="A responsive mini-project website meeting all requirements.">
     <title>My Mini Project Website</title>
     <!-- Tailwind CSS CDN -->
-    <script src="https://tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -25,35 +25,111 @@
             }
         }
     </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
+    <style>
+        /* Base & Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+        }
+
+        /* Custom Utility Classes */
+        .page-section {
+            display: none;
+            padding: 3rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        .nav-links a {
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: white;
+            border-color: #f97316;
+        }
+
+        .feature-card, .product-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-card:hover, .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .price {
+            display: block;
+            margin-top: 0.5rem;
+            font-weight: 700;
+            color: #f97316;
+            font-size: 1.25rem;
+        }
+
+        .error {
+            color: #ef4444;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .success {
+            margin-top: 0.75rem;
+            color: #16a34a;
+            font-weight: 500;
+            display: none;
+        }
+
+        /* Mobile Menu */
+        #navLinks {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            #navLinks {
+                display: flex;
+            }
+            #menuToggle {
+                display: none;
+            }
+        }
+
+        /* Input Focus Effects */
+        input:focus, textarea:focus {
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
             .page-section {
-                @apply hidden py-12 px-[5%] max-w-[1200px] mx-auto;
+                padding: 2rem 4%;
             }
-            .page-section.active {
-                @apply block;
-            }
-            .nav-links a {
-                @apply text-white font-medium transition-colors duration-300 pb-1 border-b-2 border-transparent;
-            }
-            .nav-links a:hover, .nav-links a.active {
-                @apply text-white border-accent;
-            }
-            .feature-card, .product-card {
-                @apply bg-white p-6 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] text-center transition-all duration-300 border border-slate-100;
-            }
-            .feature-card:hover, .product-card:hover {
-                @apply -translate-y-1 shadow-[0_8px_24px_rgba(0,0,0,0.1)];
-            }
-            .price {
-                @apply block mt-2 font-bold text-accent text-xl;
-            }
-            .error {
-                @apply text-red-500 text-xs mt-1 hidden;
-            }
-            .success {
-                @apply mt-3 text-green-600 font-medium hidden;
-            }
+            h1 { font-size: 1.8rem !important; }
+            h2 { font-size: 1.5rem !important; }
         }
     </style>
 </head>
@@ -64,10 +140,10 @@
         <nav class="text-white py-5 px-[5%] flex justify-between items-center max-w-[1200px] mx-auto">
             <div class="text-2xl font-bold tracking-tight">MyProject</div>
             <button class="md:hidden bg-transparent border-none text-white text-3xl cursor-pointer" id="menuToggle" aria-label="Toggle menu">☰</button>
-            <ul class="hidden md:flex list-none gap-8 max-md:absolute max-md:top-full max-md:left-0 max-md:w-full max-md:bg-primary max-md:flex-col max-md:p-6 max-md:gap-4 shadow-lg md:shadow-none" id="navLinks">
-                <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
-                <li><a href="#products" class="nav-link" data-page="products">Products</a></li>
-                <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
+            <ul class="list-none gap-8 max-md:absolute max-md:top-full max-md:left-0 max-md:w-full max-md:bg-primary max-md:flex-col max-md:p-6 max-md:gap-4 shadow-lg md:shadow-none" id="navLinks">
+                <li><a href="#home" class="nav-link active nav-links">Home</a></li>
+                <li><a href="#products" class="nav-link nav-links">Products</a></li>
+                <li><a href="#contact" class="nav-link nav-links">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -76,26 +152,27 @@
         <!-- Home Page Section -->
         <section id="home" class="page-section active">
             <div class="text-center py-20 px-8 rounded-2xl mb-12 bg-gradient-to-r from-primary/90 to-secondary/90 text-white relative overflow-hidden shadow-lg">
-                <h1 id="greeting" class="text-4xl md:text-5xl font-bold mb-4 relative z-10">Welcome!</h1>
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80')] bg-cover bg-center opacity-10"></div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 relative z-10">Welcome!</h1>
                 <p class="text-lg mb-2 relative z-10 opacity-90">Your one-stop destination for quality products & services</p>
-                <p id="currentDate" class="text-sm opacity-75 relative z-10 font-light"></p>
+                <p class="text-sm opacity-75 relative z-10 font-light">Static version — no JavaScript</p>
             </div>
 
             <div class="w-full">
                 <h2 class="text-3xl font-bold mb-2 tracking-tight text-slate-800">What We Offer</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
                     <div class="feature-card">
-                        <img src="https://unsplash.com" alt="High quality products" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <img src="https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="High quality products" class="w-full h-48 object-cover rounded-lg mb-4">
                         <h3 class="text-xl font-semibold mb-2 text-slate-800">Premium Quality</h3>
                         <p class="text-slate-600 text-sm">Carefully crafted items for every need</p>
                     </div>
                     <div class="feature-card">
-                        <img src="https://unsplash.com" alt="24/7 customer support" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="24/7 customer support" class="w-full h-48 object-cover rounded-lg mb-4">
                         <h3 class="text-xl font-semibold mb-2 text-slate-800">Reliable Support</h3>
                         <p class="text-slate-600 text-sm">Always here to help you anytime</p>
                     </div>
                     <div class="feature-card">
-                        <img src="https://unsplash.com" alt="Fast nationwide delivery" class="w-full h-48 object-cover rounded-lg mb-4">
+                        <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Fast nationwide delivery" class="w-full h-48 object-cover rounded-lg mb-4">
                         <h3 class="text-xl font-semibold mb-2 text-slate-800">Fast Delivery</h3>
                         <p class="text-slate-600 text-sm">Ship to your doorstep quickly</p>
                     </div>
@@ -111,19 +188,19 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="product-card">
-                    <img src="https://unsplash.com" alt="Wireless Bluetooth Headphones" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Wireless Bluetooth Headphones" class="w-full h-48 object-cover rounded-lg mb-4">
                     <h3 class="text-xl font-semibold mb-2 text-slate-800">Wireless Headphones</h3>
                     <p class="text-slate-600 text-sm mb-2">Crystal clear sound & long battery life</p>
                     <span class="price">₱1,999</span>
                 </div>
                 <div class="product-card">
-                    <img src="https://unsplash.com" alt="Eco-friendly Canvas Tote Bag" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <img src="https://images.unsplash.com/photo-1597633125097-5a9961e1f03d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Eco-friendly Canvas Tote Bag" class="w-full h-48 object-cover rounded-lg mb-4">
                     <h3 class="text-xl font-semibold mb-2 text-slate-800">Eco Tote Bag</h3>
                     <p class="text-slate-600 text-sm mb-2">Durable, reusable & stylish</p>
                     <span class="price">₱249</span>
                 </div>
                 <div class="product-card">
-                    <img src="https://unsplash.com" alt="Insulated Stainless Steel Tumbler" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <img src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Insulated Stainless Steel Tumbler" class="w-full h-48 object-cover rounded-lg mb-4">
                     <h3 class="text-xl font-semibold mb-2 text-slate-800">Insulated Tumbler</h3>
                     <p class="text-slate-600 text-sm mb-2">Keeps drinks hot/cold for 24 hours</p>
                     <span class="price">₱399</span>
@@ -138,30 +215,26 @@
                 <p class="text-lg text-slate-600">We’d love to hear from you!</p>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-8">
-                <form id="contactForm" class="lg:col-span-2 bg-white p-8 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100">
+                <form class="lg:col-span-2 bg-white p-8 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] border border-slate-100">
                     <div class="mb-6">
                         <label for="name" class="block mb-2 font-medium text-slate-700">Full Name *</label>
                         <input type="text" id="name" name="name" placeholder="Enter your full name" class="w-full p-3 border border-slate-200 focus:outline-none focus:border-primary rounded-lg text-base transition-colors">
-                        <span class="error" id="nameError"></span>
                     </div>
                     <div class="mb-6">
                         <label for="email" class="block mb-2 font-medium text-slate-700">Email Address *</label>
                         <input type="email" id="email" name="email" placeholder="your@email.com" class="w-full p-3 border border-slate-200 focus:outline-none focus:border-primary rounded-lg text-base transition-colors">
-                        <span class="error" id="emailError"></span>
                     </div>
                     <div class="mb-6">
                         <label for="message" class="block mb-2 font-medium text-slate-700">Message *</label>
                         <textarea id="message" name="message" rows="5" placeholder="Write your message here..." class="w-full p-3 border border-slate-200 focus:outline-none focus:border-primary rounded-lg text-base transition-colors"></textarea>
-                        <span class="error" id="messageError"></span>
                     </div>
-                    <button type="submit" class="bg-primary hover:bg-secondary text-white border-none py-4 px-8 rounded-lg text-base font-medium cursor-pointer transition-colors duration-300 shadow-md">Send Message</button>
-                    <div class="success" id="successMsg">✅ Message sent successfully!</div>
+                    <button type="submit" class="bg-primary hover:bg-secondary text-white border-none py-4 px-8 rounded-lg text-base font-medium cursor-pointer transition-colors duration-300 shadow-md hover:shadow-lg">Send Message</button>
                 </form>
                 <div class="bg-slate-100 p-8 rounded-xl leading-loose shadow-inner h-fit">
                     <h3 class="text-xl font-bold mb-4 text-slate-800">Reach Us</h3>
                     <p class="text-slate-700">📍 Marilao, Bulacan</p>
                     <p class="text-slate-700">📞 +63 998 441 8301</p>
-                    <p class="text-slate-700">✉️ Macaldo Ivan Tyron.ph</p>
+                    <p class="text-slate-700">✉️ ivan.tyron@example.ph</p>
                     <p class="text-slate-700">🕒 Mon–Fri: 9AM – 6PM</p>
                 </div>
             </div>
@@ -170,7 +243,5 @@
     <footer class="w-full bg-dark text-white text-center py-8 mt-12">
         <p class="text-slate-400 text-sm">&copy; 2026 My Mini Project. All rights reserved.</p>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
