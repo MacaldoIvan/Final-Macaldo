@@ -62,12 +62,13 @@
     </style>
 </head>
 <body class="bg-light text-dark font-sans leading-relaxed">
+
     <!-- Semantic Header & Navigation -->
     <header class="w-full">
         <nav class="bg-primary text-white py-5 px-[5%] flex justify-between items-center sticky top-0 z-[999]">
             <div class="text-2xl font-bold">MyProject</div>
             <button class="md:hidden bg-transparent border-none text-white text-3xl cursor-pointer" id="menuToggle" aria-label="Toggle menu">☰</button>
-            <ul class="nav-links max-md:absolute max-md:top-full max-md:left-0 max-md:w-full max-md:bg-primary max-md:flex-col max-md:p-6 max-md:gap-4 max-md:hidden" id="navLinks">
+            <ul class="nav-links hidden md:flex max-md:absolute max-md:top-full max-md:left-0 max-md:w-full max-md:bg-primary max-md:flex-col max-md:p-6 max-md:gap-4" id="navLinks">
                 <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
                 <li><a href="#products" class="nav-link" data-page="products">Products</a></li>
                 <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
@@ -78,26 +79,27 @@
     <main class="w-full">
         <!-- Home Page Section -->
         <section id="home" class="page-section active">
-            <div class="text-center py-20 px-8 rounded-xl mb-12 bg-gradient-to-r from-primary/85 to-secondary/85 text-white bg-[url('https://via.placeholder.com/1200x400')] bg-center bg-cover">
+            <div class="text-center py-20 px-8 rounded-xl mb-12 bg-gradient-to-r from-primary/85 to-secondary/85 text-white bg-[url('https://placeholder.com')] bg-center bg-cover">
                 <h1 id="greeting" class="text-4xl md:text-5xl font-bold mb-4">Welcome!</h1>
                 <p class="text-lg mb-2">Your one-stop destination for quality products & services</p>
                 <p id="currentDate" class="text-sm opacity-90"></p>
             </div>
+
             <div class="w-full">
                 <h2 class="text-3xl font-bold mb-2">What We Offer</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
                     <div class="feature-card">
-                        <img src="https://via.placeholder.com/400x250" alt="High quality products" class="w-full h-44 object-cover rounded-lg mb-4">
+                        <img src="https://placeholder.com" alt="High quality products" class="w-full h-44 object-cover rounded-lg mb-4">
                         <h3 class="text-xl font-semibold mb-2">Premium Quality</h3>
                         <p>Carefully crafted items for every need</p>
                     </div>
                     <div class="feature-card">
-                        <img src="https://via.placeholder.com/400x250" alt="24/7 customer support" class="w-full h-44 object-cover rounded-lg mb-4">
+                        <img src="https://placeholder.com" alt="24/7 customer support" class="w-full h-44 object-cover rounded-lg mb-4">
                         <h3 class="text-xl font-semibold mb-2">Reliable Support</h3>
                         <p>Always here to help you anytime</p>
                     </div>
                     <div class="feature-card">
-                        <img src="https://via.placeholder.com/400x250" alt="Fast nationwide delivery" class="w-full h-44 object-cover rounded-lg mb-4">
+                        <img src="https://placeholder.com" alt="Fast nationwide delivery" class="w-full h-44 object-cover rounded-lg mb-4">
                         <h3 class="text-xl font-semibold mb-2">Fast Delivery</h3>
                         <p>Ship to your doorstep quickly</p>
                     </div>
@@ -113,19 +115,19 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="product-card">
-                    <img src="https://via.placeholder.com/400x250" alt="Wireless Bluetooth Headphones" class="w-full h-44 object-cover rounded-lg mb-4">
+                    <img src="https://placeholder.com" alt="Wireless Bluetooth Headphones" class="w-full h-44 object-cover rounded-lg mb-4">
                     <h3 class="text-xl font-semibold mb-2">Wireless Headphones</h3>
                     <p>Crystal clear sound & long battery life</p>
                     <span class="price">₱1,999</span>
                 </div>
                 <div class="product-card">
-                    <img src="https://via.placeholder.com/400x250" alt="Eco-friendly Canvas Tote Bag" class="w-full h-44 object-cover rounded-lg mb-4">
+                    <img src="https://placeholder.com" alt="Eco-friendly Canvas Tote Bag" class="w-full h-44 object-cover rounded-lg mb-4">
                     <h3 class="text-xl font-semibold mb-2">Eco Tote Bag</h3>
                     <p>Durable, reusable & stylish</p>
                     <span class="price">₱249</span>
                 </div>
                 <div class="product-card">
-                    <img src="https://via.placeholder.com/400x250" alt="Insulated Stainless Steel Tumbler" class="w-full h-44 object-cover rounded-lg mb-4">
+                    <img src="https://placeholder.com" alt="Insulated Stainless Steel Tumbler" class="w-full h-44 object-cover rounded-lg mb-4">
                     <h3 class="text-xl font-semibold mb-2">Insulated Tumbler</h3>
                     <p>Keeps drinks hot/cold for 24 hours</p>
                     <span class="price">₱399</span>
@@ -174,7 +176,6 @@
         <p>&copy; 2026 My Mini Project. All rights reserved.</p>
     </footer>
 
-    <!-- Your original JavaScript file remains unchanged -->
     <script src="script.js"></script>
 </body>
 </html>
