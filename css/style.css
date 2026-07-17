@@ -1,0 +1,244 @@
+/* Base Reset & Variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+:root {
+    --primary: #2563eb;
+    --secondary: #1e40af;
+    --accent: #f97316;
+    --light: #f8fafc;
+    --dark: #1e293b;
+    --shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+body {
+    line-height: 1.6;
+    color: var(--dark);
+    background-color: var(--light);
+}
+
+/* Semantic Layout */
+header, main, footer {
+    width: 100%;
+}
+
+/* Navigation Bar */
+.navbar {
+    background: var(--primary);
+    color: white;
+    padding: 1.2rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--accent);
+}
+
+/* Page Section Switching */
+.page-section {
+    display: none;
+    padding: 3rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-section.active {
+    display: block;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 5rem 2rem;
+    background: linear-gradient(rgba(37, 99, 235, 0.85), rgba(30, 64, 175, 0.85)), url('https://via.placeholder.com/1200x400') center/cover;
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Grid Layouts (Design Principles) */
+.feature-grid, .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature-card, .product-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover, .product-card:hover {
+    transform: translateY(-5px);
+}
+
+img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.price {
+    display: block;
+    margin-top: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.2rem;
+}
+
+/* Contact Form */
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.contact-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.error {
+    color: #ef4444;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    display: block;
+}
+
+.success {
+    margin-top: 1rem;
+    color: #16a34a;
+    font-weight: 500;
+    display: none;
+}
+
+.submit-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: var(--secondary);
+}
+
+.contact-details {
+    background: #e2e8f0;
+    padding: 2rem;
+    border-radius: 10px;
+    line-height: 2;
+}
+
+/* Footer */
+footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--primary);
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 1rem;
+        display: none;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+}
