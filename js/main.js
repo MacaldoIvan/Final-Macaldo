@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Dynamic Greeting & Date
+    // 1. Dynamic Greeting & Date Utility
     const greetingEl = document.getElementById('greeting');
     const dateEl = document.getElementById('currentDate');
     if (greetingEl && dateEl) {
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dateEl.textContent = new Date().toLocaleDateString('en-US', dateOptions);
     }
 
-    // 2. Page Navigation Switch
+    // 2. Multi-Page View Transition Switching System
     const navLinks = document.querySelectorAll('.nav-link');
     const pageSections = document.querySelectorAll('.page-section');
     const navLinksContainer = document.getElementById('navLinks');
@@ -19,39 +19,47 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetPage = link.dataset.page;
+            
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
+            
             pageSections.forEach(section => {
-                section.classList.remove('active');
-                if (section.id === targetPage) section.classList.add('active');
+                if (section.id === targetPage) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
             });
-            // Ensure mobile menu closes after choosing a menu category link
+
+            // Resets scroll window offset when user shifts categories
+            window.scrollTo({ top: 0, behavior: 'instant' });
+
+            // Ensure adaptive overlay menu drawer collapses down
             navLinksContainer.classList.add('hidden');
             navLinksContainer.classList.remove('flex');
         });
     });
 
-    // 3. Mobile Menu Toggle
+    // 3. Mobile View Trigger Toggle
     document.getElementById('menuToggle').addEventListener('click', () => {
         navLinksContainer.classList.toggle('hidden');
         navLinksContainer.classList.toggle('flex');
     });
 
-    // 4. Contact Form Validation
+    // 4. Form Submission Input Verification Integrity Block
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             let isValid = true;
             
-            // Clean/Reset styles and states before evaluation
             document.querySelectorAll('.error').forEach(err => {
                 err.textContent = '';
                 err.style.display = 'none';
             });
             document.getElementById('successMsg').style.display = 'none';
 
-            // Validate Name
+            // Validate full name criteria lengths
             const name = document.getElementById('name').value.trim();
             const nameError = document.getElementById('nameError');
             if (name.length < 2) {
@@ -60,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 isValid = false;
             }
 
-            // Validate Email
+            // Verify explicit format patterns for emails
             const email = document.getElementById('email').value.trim();
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             const emailError = document.getElementById('emailError');
@@ -70,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 isValid = false;
             }
 
-            // Validate Message
+            // Confirm context volume parameters for textual inputs
             const message = document.getElementById('message').value.trim();
             const messageError = document.getElementById('messageError');
             if (message.length < 10) {
@@ -79,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 isValid = false;
             }
 
-            // If completely valid, issue success callback
+            // Process callback if all validations evaluate successfully
             if (isValid) {
                 document.getElementById('successMsg').style.display = 'block';
                 contactForm.reset();
